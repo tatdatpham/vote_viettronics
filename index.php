@@ -5,13 +5,13 @@
 
 	if(isset($_GET['filter'])){
 		$id = $_GET['filter'];
-		$results = $mysqli->query("SELECT * FROM `account_info` WHERE `unit_id` = '$id'");
+		$results = $mysqli->query("SELECT * FROM `account_info` WHERE `unit_id` = '$id' AND `status` ='2'");
 	}elseif(isset($_POST['filter_unit'])){
 		$unit_id = $_POST['filter_unit'];
-		$results = $mysqli->query("SELECT * FROM `account_info` WHERE `unit_id` = '$unit_id'");
+		$results = $mysqli->query("SELECT * FROM `account_info` WHERE `unit_id` = '$unit_id' AND `status` ='2'");
 	}
 	else{ 
-		$results = $mysqli->query("SELECT * FROM `account_info`");
+		$results = $mysqli->query("SELECT * FROM `account_info` WHERE `status` ='2'");
 	}
 
 	
@@ -24,7 +24,7 @@
 <section class="breadcrumbs">
 	<div class="container">
 		<ul class="horizontal_list clearfix bc_list f_size_medium">
-			<li class="m_right_10 current"><a href="#" class="default_t_color">Trang chủ<i class="fa fa-angle-right d_inline_middle m_left_10"></i></a></li>
+			<li class="m_right_10 current"><a href="<?php echo $base_url;?>" class="default_t_color">Trang chủ<i class="fa fa-angle-right d_inline_middle m_left_10"></i></a></li>
 		</ul>
 	</div>
 </section>

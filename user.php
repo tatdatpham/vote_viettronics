@@ -47,7 +47,7 @@
 <section class="breadcrumbs">
 	<div class="container">
 		<ul class="horizontal_list clearfix bc_list f_size_medium">
-			<li class="m_right_10 current"><a href="#" class="default_t_color">Trang chủ<i class="fa fa-angle-right d_inline_middle m_left_10"></i></a></li>
+			<li class="m_right_10 current"><a href="<?php echo $base_url;?>" class="default_t_color">Trang chủ<i class="fa fa-angle-right d_inline_middle m_left_10"></i></a></li>
 			<li class="m_right_10"><a href="#" class="default_t_color">Giảng viên</a><i class="fa fa-angle-right d_inline_middle m_left_10"></i></li>
 			<?php if($check == 0){
 				echo '<li><a href="#" class="default_t_color">Không tìm thấy trang</a></li>';

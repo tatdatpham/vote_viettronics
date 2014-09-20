@@ -24,7 +24,7 @@
 		}
 	}
 
-	$bxh = $mysqli->query("SELECT COUNT(*)as vote, account_id_voted, unit_id, unit_name,avatar,id FROM vote_info GROUP BY account_id ORDER BY vote DESC LIMIT 5");
+	$bxh = $mysqli->query("SELECT COUNT(*)as vote, account_id_voted, unit_id, unit_name,avatar,id FROM vote_info WHERE status = '2' GROUP BY account_id ORDER BY vote DESC LIMIT 5");
 	$stt =1;
 	//mau sac cua top (vi tri)
 	$pos=array("","danger","warning","success","primary","default");
@@ -40,9 +40,7 @@
 					<div class="container">
 						<div class="row clearfix">
 							<div class="col-lg-4 col-md-4 col-sm-5 t_xs_align_c">
-								<p class="f_size_small scheme_color">Chào mừng tới hệ thống bình chọn giảng viên	
-								
-								</p>
+								<a><p class="f_size_small">Chào mừng tới hệ thống bình chọn giảng viên	</p></a>
 							</div>
 							<div class="col-lg-4 col-md-4 col-sm-2 t_align_c t_xs_align_c">
 								<p class="f_size_small">Cao Đẳng Công Nghệ <b class="color_dark">VIETTRONICS</b></p>
@@ -55,7 +53,7 @@
 										echo '<li><a href="#" data-popup="#login_popup">Đăng ký</a></li>';
 									}else{
 
-										echo '<li>Xin chào <a href="profile" class="scheme_color"><strong>'.$_SESSION['fullname'].'</strong></a></li>';
+										echo '<li>Xin chào <a href="'.$base_url.'profile-'.$_SESSION['account_id'].'.html" class="scheme_color"><strong>'.$_SESSION['fullname'].'</strong></a></li>';
 										echo '<li><a href="logout" class="scheme_color">Đăng xuất</a></li>';
 									}
 									?>
