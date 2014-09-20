@@ -120,7 +120,7 @@
 											
 										</ul>
 										<!--xem bang xep hang-->
-										<a href="#"><button class="btn btn-danger btn-square btn-block">Xem tất cả</button></a>
+										<a href="<?php echo $base_url?>top"><button class="btn btn-danger btn-square btn-block">Xem tất cả</button></a>
 									
 									</div>
 								</li>

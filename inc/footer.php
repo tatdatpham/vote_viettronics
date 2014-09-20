@@ -4,18 +4,13 @@
 				<!--copyright part-->
 			<div class="footer_bottom_part">
 				<div class="container clearfix t_mxs_align_c">
-					<p class="f_left f_mxs_none m_mxs_bottom_10">Copyright &copy; 2014 Trung tâm mạng trường Cao đẳng Công nghệ Viettronics.</p>
-					<ul class="f_right horizontal_list clearfix f_mxs_none d_mxs_inline_b">
-						<li><img src="images/payment_img_1.png" alt=""></li>
-						<li class="m_left_5"><img src="images/payment_img_2.png" alt=""></li>
-						<li class="m_left_5"><img src="images/payment_img_3.png" alt=""></li>
-						<li class="m_left_5"><img src="images/payment_img_4.png" alt=""></li>
-						<li class="m_left_5"><img src="images/payment_img_5.png" alt=""></li>
-					</ul>
+					<center><p class="f_center f_mxs_none m_mxs_bottom_10">Copyright &copy; 2014 Trung tâm mạng trường Cao đẳng Công nghệ Viettronics.</p></center>
+					
 				</div>
 			</div>
 		</footer>
 	</div>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 	<script src="js/jquery-2.1.0.min.js"></script>
 	<script src="js/jquery-ui.min.js"></script>
 	<script src="js/apps.js"></script>

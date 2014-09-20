@@ -1,5 +1,5 @@
 <?php
-	$top = $mysqli->query("SELECT COUNT(*)as vote, account_id_voted, unit_id, unit_name,avatar FROM vote_info GROUP BY account_id ORDER BY vote DESC LIMIT 10");
+	$top = $mysqli->query("SELECT COUNT(*)as vote, account_id_voted, unit_id, unit_name,avatar,id,status FROM vote_info WHERE status = 2 GROUP BY account_id ORDER BY vote DESC LIMIT 10");
 ?>
 <aside class="col-lg-3 col-md-3 col-sm-3">
 	<!--widgets-->
@@ -15,7 +15,7 @@
 				while ($obj_u2 = $sql_u2->fetch_object()) {
 					echo '
 					<li>
-						<a href="'.$base_url.'?filter='.$obj_u2->id.'" class="f_size_large color_dark d_block relative">
+						<a href="'.$base_url.'unit-'.$obj_u2->id.'.html" class="f_size_large color_dark d_block relative">
 							<b>'.$obj_u2->unit_name.'</b>
 							<span class="bg_light_color_1 r_corners f_right color_dark talign_c"></span>
 						</a>
@@ -40,7 +40,7 @@
 				<div class="clearfix m_bottom_15">
 					<img src="images/avatar/'.$obj_t->avatar.'" height="60" width="60"  class="f_left m_right_10 m_sm_bottom_10 f_sm_none f_xs_left m_xs_bottom_0">
 					<div style="padding-top: 2px;">
-						<p><strong><a href="#" class="scheme_color bt_block bt_link">'.$obj_t->account_id_voted.'</a></strong></p>
+						<p><strong><a href="'.$base_url.'user-'.$obj_t->id.'.html" class="scheme_color bt_block bt_link">'.$obj_t->account_id_voted.'</a></strong></p>
 						<a href="'.$base_url.'?filter='.$obj_t->unit_id.'" class="color_dark bt_block bt_link">'.$obj_t->unit_name.'</a>
 					</div>
 					

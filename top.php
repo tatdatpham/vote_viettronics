@@ -25,7 +25,7 @@
 			
 			<section class="col-lg-12 col-md-12col-sm-12">
 				<div class="the-box">
-					<h4 class="small-title">MORRIS BAR</h4>
+					<h4 class="small-title">Bảng Xếp Hạng Bình Chọn</h4>
 					<div id="myfirstchart" style="height: 250px;"></div>
 				</div><!-- .the-box -->
 
