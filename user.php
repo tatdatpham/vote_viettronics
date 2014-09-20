@@ -117,6 +117,15 @@
 				</div>
 				
 				<?php 
+				if(!isset($_SESSION['fullname'])){
+					echo '
+						<div class="clearfix m_bottom_15">
+							<button class="button_type_4 r_corners bg_scheme_color color_light tr_delay_hover f_left f_size_medium" data-popup="#login_popup">
+							  Đăng nhập để bình chọn
+							</button>
+						</div>
+				';
+				}
 				if(isset($_SESSION['fullname'])){
 					$tk_id = $_SESSION['account_id'];
 					$check_vote1 = $mysqli->query("SELECT * FROM `vote` WHERE `account_vote` = $tk_id");
