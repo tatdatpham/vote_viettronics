@@ -48,21 +48,7 @@
 			}
 			
 		}
-		if(isset($_SESSION['fullname'])){
-			//kiem tra nguoi dung co ton tai khong, co thi get info
-			$check = $mysqli->query("SELECT * FROM `account_info` WHERE `id` = '$id'");
-			$check_id = $check->fetch_row();
-			if($check_id == 0){
-				$title ='Không tìm thấy trang - Hệ thống bình chọn giảng viên trường Cao đẳng Viettronics';
-			}else{
-				$sql = $mysqli->query("SELECT * FROM `account_info` WHERE `id` = '$id'");
-				$obj = $sql->fetch_object();
-
-				$title =$obj->fullname.' -  Hệ thống bình chọn giảng viên trường Cao đẳng Viettronics';
-			}
-		}
 		
-
 		// doi mat khau
 		if(isset($_POST['submit_change_pass'])){
 			$pass_old     = md5($mysqli->real_escape_string($_POST['pass_old']));
@@ -89,8 +75,58 @@
 		}
 
 		
+		//thay avatar
+		if(isset($_POST['submit_avatar']) && $_SESSION['status'] ==2 ){
 
+			if(!empty($_FILES['avatar'])){
+				$file_ext=strtolower(end(explode('.',$_FILES['avatar']['name'])));
+				$extensions = array("jpeg","jpg","png"); // dinh dang duoc phep upload
+				$max_file_size = 10240000; //5MB
+				$path = "images/avatar/"; // Thu muc lưu file
+				$file_name = $_FILES['avatar']['name'];
+				$exten = substr($file_name, -4); //lay phan mo rong cua file
+				$name = 'avatar-'.$id.$exten;
+				//kiem tra chieu cao, rong cua anh
+				$image_info = getimagesize($_FILES["avatar"]["tmp_name"]);
+				$image_width = $image_info[0];
+				$image_height = $image_info[1];
+				if ($_FILES['avatar']['error'] == 0) {	           
+					if ($_FILES['avatar']['size'] > $max_file_size) {
+						$errors[] = 'File ảnh quá lớn!.';
+						//continue; // Bỏ qua nếu file neu kích thước > kich thuoc tối đa cho phep
+					}
+					else if(in_array($file_ext,$extensions )=== false){
+						$errors[] = 'File không đúng định dạng!.';
+					}elseif ($image_width < 500 || $image_height < 500) {
+						$errors[] = 'Kích thước ảnh tối thiểu là 500x500 (px).';
+					}
+					else{ // Neu khong tim thay loi thi upload file
+							//upload file vao thu muc
+							move_uploaded_file($_FILES["avatar"]["tmp_name"], $path.$name);
+							//cap nhat bang account
+							$mysqli->query("UPDATE `account` SET `avatar` = '$name' WHERE `id` = '$id'");
+							$msg[] = 'Đã thay đổi ảnh đại diện thành công!';
+						
+				    }
+				}
+			}
+		}
 
+		
+		if(isset($_SESSION['fullname'])){
+			//kiem tra nguoi dung co ton tai khong, co thi get info
+			$check = $mysqli->query("SELECT * FROM `account_info` WHERE `id` = '$id'");
+			$check_id = $check->fetch_row();
+			if($check_id == 0){
+				$title ='Không tìm thấy trang - Hệ thống bình chọn giảng viên trường Cao đẳng Viettronics';
+			}else{
+				$sql = $mysqli->query("SELECT * FROM `account_info` WHERE `id` = '$id'");
+				$obj = $sql->fetch_object();
+
+				$title =$obj->fullname.' -  Hệ thống bình chọn giảng viên trường Cao đẳng Viettronics';
+			}
+		}
+		
 
 	
 
