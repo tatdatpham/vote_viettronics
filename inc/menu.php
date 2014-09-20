@@ -140,8 +140,8 @@
 							<ul class="horizontal_list main_menu clearfix">
 								<li class="current relative f_xs_none m_xs_bottom_5"><a href="<?php echo $base_url;?>" class="tr_delay_hover color_light tt_uppercase"><b>Trang chủ</b></a></li>
 								<li class="relative f_xs_none m_xs_bottom_5"><a href="#" class="tr_delay_hover color_light tt_uppercase"><b>Mục đích - Yêu cầu</b></a></li>
-								<li class="relative  f_xs_none m_xs_bottom_5"><a href="category_grid.html" class="tr_delay_hover color_light tt_uppercase"><b>Đối tượng - Tiêu chuẩn</b></a></li>
-								<li class="relative f_xs_none m_xs_bottom_5"><a href="blog.html" class="tr_delay_hover color_light tt_uppercase"><b>Hướng dẫn</b></a></li>
+								<li class="relative  f_xs_none m_xs_bottom_5"><a href="#" class="tr_delay_hover color_light tt_uppercase"><b>Đối tượng - Tiêu chuẩn</b></a></li>
+								<li class="relative f_xs_none m_xs_bottom_5"><a href="guide.html" class="tr_delay_hover color_light tt_uppercase"><b>Hướng dẫn</b></a></li>
 								<?php if(isset($_SESSION['status'])){
 									if($_SESSION['status'] == 3){
 									echo '<li class="relative f_xs_none m_xs_bottom_5"><a href="'.$base_url.'add-user.html" class="tr_delay_hover color_light tt_uppercase"><b>Thêm giảng viên</b></a></li>';

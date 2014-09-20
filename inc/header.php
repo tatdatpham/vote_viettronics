@@ -20,4 +20,5 @@
 		<!--font include-->
 		<link href="js/plugins/morris-chart/morris.min.css" rel="stylesheet">
 		<link href="css/font-awesome.min.css" rel="stylesheet">
+		<link href="js/plugins/summernote/summernote.min.css" rel="stylesheet">
 	</head>

@@ -3120,7 +3120,7 @@ aside .addthis_widget_container{
 [role="search"].type_2 input[type="text"]{
 	padding-right:40px;
 }
-input:not([type="submit"]),textarea{
+input:not([type="submit"]){
 	background:#f5f7f8;
 	height:40px;
 	padding:9px 10px;
@@ -3171,7 +3171,7 @@ input[type="checkbox"]:checked + label:after{
 input[type="radio"]:checked + label:before,.block_select.selected:before{
 	background-position:0 -22px;
 }
-#contactform.mini textarea,.notes{
+#contactform.mini ,.notes{
 	height:140px;
 }
 #cf_message{
@@ -6759,7 +6759,7 @@ FORM
 .form-control.bold-border				{border-width: 2px;}
 .form-control.no-border					{border: none;}
 .form-control.rounded 					{border-radius: 4px;}
-textarea.no-resize						{resize: none;}
+.no-resize						{resize: none;}
 .input-group-addon.rounded 				{border-radius: 0px;}
 .input-group-addon.input-sm 				{border-radius: 0px;}
 .input-group-addon.input-lg 				{border-radius: 0px;}
@@ -10005,7 +10005,7 @@ p.bordered.dashed{
 }
 
 .post-form-timeline{}
-.post-form-timeline textarea{resize: none;}
+
 ul.timeline{
 	position: relative;
 	padding: 0;

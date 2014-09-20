@@ -9,6 +9,7 @@ RewriteRule ^user-([0-9]+)\.html$ user.php?id=$1
 RewriteRule ^unit-([0-9]+)\.html$ index.php?filter=$1
 RewriteRule ^profile-([0-9]+)\.html$ profile.php?id=$1
 
+
 ##
 ##viet lai URL cho cac file .php
 ##
@@ -18,6 +19,7 @@ RewriteRule ^add-user.html  add-user.php [L]
 RewriteRule ^top.html  top.php [L]
 RewriteRule ^profile.html  profile.php [L]
 RewriteRule ^guide.html  guide.php [L]
+RewriteRule ^add-guide.html  guide.php?action=add [L]
 
 ##Error
 ErrorDocument 404 /404.html

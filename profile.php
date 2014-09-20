@@ -32,24 +32,17 @@
 		//cap nhat thong tin giang vien
 		if(isset($_POST['submit_update_user'])){
 
-			$email        = $mysqli->real_escape_string($_POST['email']);
 			$fullname     = $mysqli->real_escape_string($_POST['fullname']);
 	        $unit_id  	  = $mysqli->real_escape_string($_POST['unit_id']);
 	        $teaching  	  = $mysqli->real_escape_string($_POST['teaching']);
 	        $introduced  	  = $mysqli->real_escape_string($_POST['introduced']);	
-	        //kiem tra email da duoc su dung chua
-	    	$check_e        = $mysqli->query("SELECT * FROM `account_info` WHERE `email` = '$email' AND `id` <> '$id'");
-			$check_email    = $check_e->fetch_row();
-			if($check_email != 0){
-				$errors = 'Email '.$email.' đã được sử dụng';
-			}else{
-				if(count($errors) ==0){
+	        
+			if(count($errors) ==0){
 
-					//cap nhat bang account
-					$mysqli->query("UPDATE `account` SET `email`='$email',`fullname`='$fullname',
-						`unit_id`='$unit_id',`teaching`='$teaching',`introduced`='$introduced' WHERE `id` = '$id'");
-					$msg[] = 'Đã cập nhật thông tin thành công!';
-				}
+				//cap nhat bang account
+				$mysqli->query("UPDATE `account` SET `fullname`='$fullname',
+					`unit_id`='$unit_id',`teaching`='$teaching',`introduced`='$introduced' WHERE `id` = '$id'");
+				$msg[] = 'Đã cập nhật thông tin thành công!';
 			}
 			
 		}
@@ -242,7 +235,7 @@
 						<li><a href="#panel-friend" data-toggle="tab"><i class="fa fa-edit"></i></a></li>
 						<li><a href="#panel-pass" data-toggle="tab"><i class="fa fa-key"></i></a></li>
 						<li><a href="#panel-avatar" data-toggle="tab"><i class="fa fa-camera"></i></a></li>
-						<li><a href="#panel-clock" data-toggle="tab"><i class="fa fa-clock-o"></i></a></li>
+						<?php if($_SESSION['status'] ==3 ) echo '<li><a href="#panel-clock" data-toggle="tab"><i class="fa fa-clock-o"></i></a></li>';?>
 					</ul>
 				  </div>
 					<div id="panel-collapse-1" class="collapse in">
@@ -338,13 +331,6 @@
 												
 												<div class="form-group has-feedback left-feedback no-label">
 													<div class="input-group">
-														<span class="input-group-addon danger"><i class="fa fa-user"></i></span>
-														<input type="email" name="email" class="form-control" placeholder="Email người dùng" value="<?php echo $obj->email;?>" required>
-													</div>
-												  
-												</div>
-												<div class="form-group has-feedback left-feedback no-label">
-													<div class="input-group">
 														<span class="input-group-addon danger"><i class="fa fa-ticket"></i></span>
 														<input type="text" name="fullname"  class="form-control" placeholder="Họ và tên" value="<?php echo $obj->fullname;?>" required>
 													</div>
@@ -379,7 +365,7 @@
 												<div class="form-group has-feedback left-feedback no-label">
 													<div class="input-group">
 														<span class="input-group-addon danger"><i class="fa fa-bullhorn"></i></span>
-														<textarea name="introduced" class="form-control"  rows="9" placeholder="Giới thiệu bản thân" required><?php echo $obj->introduced;?></textarea>
+														<textarea name="introduced" class="form-control"  rows="7" placeholder="Giới thiệu bản thân" required><?php echo $obj->introduced;?></textarea>
 													</div>
 												  
 												</div>
@@ -392,8 +378,9 @@
 									<?php
 									//ket thuc form chinh sua thong tin cua giang vien 
 									}else{ //form chinh sua thong tin cua admin va nguoi dung thuong
+										if($_SESSION['status'] ==3){
 										?>
-									<form role="form" method="POST" enctype="multipart/form-data">
+									<form role="form" method="POST">
 										<div class="row">
 											<div class="col-sm-6">
 												
@@ -417,7 +404,11 @@
 										</div>
 										<button type="submit" name="submit_update_user2" class="btn btn-danger btn-block btn-lg"><i class="fa fa-sign-in"></i> Cập nhật thông tin</button>
 									</form>
-									<?php }?>
+									<?php }
+										if($_SESSION['status'] ==1) {
+											echo '<center><h4 class="scheme_color"> Tính năng này chỉ dành cho giảng viên! </h4></center>';
+										}
+									}?>
 								</div>
 
 								<!-- doi mat khau-->
@@ -493,6 +484,7 @@
 
 								<!-- set time de binh chon -->
 								<?php 
+								if($_SESSION['status'] ==3){
 									$sql_t = $mysqli->query("SELECT * FROM `vote_time` WHERE `id` ='1'");
 									$obj_t = $sql_t->fetch_object();
 									$datetime1 = $obj_t->timestart;
@@ -553,6 +545,7 @@
 										<button type="submit" name="submit_time" class="btn btn-danger btn-block btn-lg"><i class="fa fa-gear"></i> Đặt thời gian</button>
 									</form>
 								</div>
+								<?php } ?>
 							</div><!-- /.tab-content -->
 						</div><!-- /.panel-body -->
 					</div><!-- /.collapse in -->
