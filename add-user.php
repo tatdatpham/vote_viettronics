@@ -17,9 +17,6 @@
 		        $introduced  	  = $mysqli->real_escape_string($_POST['introduced']);
 		        if(strlen($_POST['password']) < 6)
 					$errors[] = 'Mật khẩu có tối thiểu 6 ký tự.';
-
-				if((!empty($_POST['password']) && !preg_match('#^[a-z0-9]+$#i', $_POST['password'])))
-					$errors[] = 'Mật khẩu chỉ chứa ký tự: aA-zZ, 0-9.';	
 		        //kiem tra email da duoc su dung chua
 		    	$check_e        = $mysqli->query("SELECT * FROM `account_info` WHERE `email` = '$email'");
 				$check_email    = $check_e->fetch_row();
@@ -78,9 +75,9 @@
 <section class="breadcrumbs">
 	<div class="container">
 		<ul class="horizontal_list clearfix bc_list f_size_medium">
-			<li class="m_right_10 current"><a href="#" class="default_t_color">Trang chủ<i class="fa fa-angle-right d_inline_middle m_left_10"></i></a></li>
+			<li class="m_right_10 current"><a href="<?php echo $base_url;?>" class="default_t_color">Trang chủ<i class="fa fa-angle-right d_inline_middle m_left_10"></i></a></li>
 			<li class="m_right_10"><a href="#" class="default_t_color">Giảng viên</a><i class="fa fa-angle-right d_inline_middle m_left_10"></i></li>
-			<li><a href="#" class="default_t_color">Thêm giảng viên mới</a></li>
+			<li><a href="<?php echo $base_url;?>add-user" class="default_t_color">Thêm giảng viên mới</a></li>
 		</ul>
 	</div>
 </section>

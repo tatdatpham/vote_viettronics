@@ -43,18 +43,18 @@
 								<a><p class="f_size_small">Chào mừng tới hệ thống bình chọn giảng viên	</p></a>
 							</div>
 							<div class="col-lg-4 col-md-4 col-sm-2 t_align_c t_xs_align_c">
-								<p class="f_size_small">Cao Đẳng Công Nghệ <b class="color_dark">VIETTRONICS</b></p>
+								<p class="f_size_small color_dark">Cao Đẳng Công Nghệ <b>VIETTRONICS</b></p>
 							</div>
 							<nav class="col-lg-4 col-md-4 col-sm-5 t_align_r t_xs_align_c">
-								<ul class="d_inline_b horizontal_list clearfix f_size_small users_nav scheme_color">
+								<ul class="d_inline_b horizontal_list clearfix f_size_small users_nav">
 									<?php
 									if(!isset($_SESSION['fullname'])){
-										echo '<li><a href="#" data-popup="#login_popup">Đăng nhập</a></li>';
-										echo '<li><a href="#" data-popup="#login_popup">Đăng ký</a></li>';
+										echo '<li><a href="#" data-popup="#login_popup" style="color:#29AF8E;">Đăng nhập</a></li>';
+										echo '<li><a href="#" data-popup="#login_popup" style="color:#29AF8E;">Đăng ký</a></li>';
 									}else{
 
-										echo '<li>Xin chào <a href="'.$base_url.'profile-'.$_SESSION['account_id'].'.html" class="scheme_color"><strong>'.$_SESSION['fullname'].'</strong></a></li>';
-										echo '<li><a href="logout" class="scheme_color">Đăng xuất</a></li>';
+										echo '<li>Xin chào <a href="'.$base_url.'profile.html" ><strong>'.$_SESSION['fullname'].'</strong></a></li>';
+										echo '<li><a href="'.$base_url.'logout.html">Đăng xuất</a></li>';
 									}
 									?>
 									
@@ -118,7 +118,7 @@
 											
 										</ul>
 										<!--xem bang xep hang-->
-										<a href="<?php echo $base_url?>top"><button class="btn btn-danger btn-square btn-block">Xem tất cả</button></a>
+										<a href="<?php echo $base_url?>top.html"><button class="btn btn-danger btn-square btn-block">Xem tất cả</button></a>
 									
 									</div>
 								</li>
@@ -144,7 +144,7 @@
 								<li class="relative f_xs_none m_xs_bottom_5"><a href="blog.html" class="tr_delay_hover color_light tt_uppercase"><b>Hướng dẫn</b></a></li>
 								<?php if(isset($_SESSION['status'])){
 									if($_SESSION['status'] == 3){
-									echo '<li class="relative f_xs_none m_xs_bottom_5"><a href="'.$base_url.'add-user" class="tr_delay_hover color_light tt_uppercase"><b>Thêm giảng viên</b></a></li>';
+									echo '<li class="relative f_xs_none m_xs_bottom_5"><a href="'.$base_url.'add-user.html" class="tr_delay_hover color_light tt_uppercase"><b>Thêm giảng viên</b></a></li>';
 									}
 								}
 								?>

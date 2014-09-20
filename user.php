@@ -46,8 +46,8 @@
 						');
 				}
 			}
-			$title =$obj->fullname.' -  Hệ thống bình chọn giảng viên trường Cao đẳng Viettronics';
-		}else {$title ='Không tim thấy trang -  Hệ thống bình chọn giảng viên trường Cao đẳng Viettronics';}
+			$title =$obj->fullname.' - Hệ thống bình chọn giảng viên trường Cao đẳng Viettronics';
+		}else {$title ='Không tim thấy trang - Hệ thống bình chọn giảng viên trường Cao đẳng Viettronics';}
 ?>
 
 <title><?php echo $title;?></title>

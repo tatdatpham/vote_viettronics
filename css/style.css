@@ -586,7 +586,7 @@ mark{
 }
 ::-webkit-scrollbar{
 	width:10px;
-	background:#29AF8E;
+	background:#323a45;
 }
 ::-webkit-scrollbar-thumb{
 	-webkit-border-radius:4px;
@@ -743,7 +743,7 @@ s{
 	background:#292f38;
 }
 .bg_color_dark_2{
-	background:#29AF8E;
+	background:#323a45;
 }
 .banner_title{
 	font-size:2.28em;
@@ -818,7 +818,7 @@ blockquote:after{
 	border-bottom:1px solid #e2e6e7;
 }
 .h_top_part.type_2{
-	background:#29AF8E;
+	background:#323a45;
 	color:#bdc3c7;
 	padding:6px 0;
 }
@@ -853,7 +853,7 @@ blockquote:after{
 	border-radius:4px 4px 0 0;
 }
 .menu_wrap,#footer{
-	background:#29AF8E;
+	background:#323a45;
 }
 .menu_wrap.type_2:not(.sticky) .main_menu > li:first-child > a{
 	-webkit-border-top-left-radius:4px;
@@ -1218,7 +1218,7 @@ blockquote:after{
 	border-bottom-right-radius:0px;
 }
 .tabs_nav .ui-tabs-active a,.tabs_nav li:hover a[class*="color"]{
-	background:#29AF8E;
+	background:#323a45;
 	color:#f9f9f9;
 }
 .tabs_content{
@@ -2707,7 +2707,7 @@ li:hover .tooltip,a:hover .tooltip,button:hover .tooltip{
 	padding:9px 0;
 }
 .widget figcaption{
-	background:#29AF8E;
+	background:#323a45;
 	padding:15px 20px 14px;
 }
 .widget figcaption[class*="relative"]{
@@ -2910,7 +2910,7 @@ aside .addthis_widget_container{
 	cursor:pointer;
 }
 .a_title.active{
-	background:#29AF8E;
+	background:#323a45;
 }
 .a_title [class*="us_icon"]{
 	position:absolute;
@@ -4969,9 +4969,9 @@ TYPOGRAPY
 	margin: 0 3px;
 }
 hr						{margin: 30px 0;}
-a						{color: #37BC9B}
-a:hover					{color: #29AF8E}
-a:focus					{color: #29AF8E}
+a						{color: #e74c3c}
+a:hover					{color: #34495e}
+a:focus					{color: #34495e}
 .text-muted {
 	color: #AAB2BD;
 }

@@ -3,7 +3,7 @@
 	include('inc/header.php');
 	include('inc/menu.php');
 	
-	$bxh = $mysqli->query("SELECT COUNT(*)as vote, account_id_voted, unit_id, unit_name,avatar,id FROM vote_info GROUP BY account_id ORDER BY vote DESC");
+	$bxh = $mysqli->query("SELECT COUNT(*)as vote, account_id_voted, unit_id, unit_name,avatar,id FROM vote_info WHERE status = '2' GROUP BY account_id ORDER BY vote DESC");
 	
 ?>
 
@@ -12,7 +12,7 @@
 <section class="breadcrumbs">
 	<div class="container">
 		<ul class="horizontal_list clearfix bc_list f_size_medium">
-			<li class="m_right_10 current"><a href="#" class="default_t_color">Trang chủ<i class="fa fa-angle-right d_inline_middle m_left_10"></i></a></li>
+			<li class="m_right_10 current"><a href="<?php echo $base_url;?>" class="default_t_color">Trang chủ<i class="fa fa-angle-right d_inline_middle m_left_10"></i></a></li>
 			<li class="m_right_10"><a href="#" class="default_t_color">Bảng xếp hạng</a><i class="fa fa-angle-right d_inline_middle m_left_10"></i></li>
 			
 		</ul>

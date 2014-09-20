@@ -1,9 +1,10 @@
 <?php 
 	$title ='Hệ thống bình chọn giảng viên trường Cao đẳng Viettronics';
-	if(isset($_GET['id'])){
+	
 		include('inc/header.php'); 
 		include('inc/menu.php'); 
-		$id = $_GET['id'];
+	if(isset($_SESSION['account_id'])){
+		$id = $_SESSION['account_id'];
 		$errors = array();
 		$msg = array();
 		$warning = array();
@@ -202,7 +203,7 @@
 			<!--left content column-->
 			<section class="col-lg-9 col-md-9 col-sm-9">
 			<?php 
-			if(isset($_SESSION['fullname'])){
+			if(isset($_SESSION['account_id'])){
 				if($check_id == 0){
 					echo '<h2> Không tìm thấy trang! 
 							<a href="'.$base_url.'" class="scheme_color"> 
@@ -227,14 +228,14 @@
 							<p class="text-muted">Bộ môn :  <a href="#fakelink">'.$obj->teaching.'</a></p>';
 						}?>
 						<p class="right-button">
-						<a href="#panel-friend" data-toggle="tab" class="btn btn-primary btn-sm">Sửa hồ sơ</a>
+						<a href="#panel-friend" data-toggle="tab" class="btn btn-danger btn-sm">Sửa hồ sơ</a>
 						<a href="mailto:<?php echo $obj->email;?>" class="btn btn-danger btn-sm"><i class="fa fa-envelope"></i></a>
 						</p>
 					</div><!-- /.profile-info -->
 				</div><!-- /.the-box .transparent .profile-heading -->
 				<!-- END PROFILE HEADING -->
 				
-				<div class="panel with-nav-tabs panel-primary panel-square panel-no-border">
+				<div class="panel with-nav-tabs panel-danger panel-square panel-no-border">
 				  <div class="panel-heading">
 					<ul class="nav nav-tabs">
 						<li class="active"><a href="#panel-about" data-toggle="tab"><i class="fa fa-user"></i></a></li>
@@ -337,14 +338,14 @@
 												
 												<div class="form-group has-feedback left-feedback no-label">
 													<div class="input-group">
-														<span class="input-group-addon primary"><i class="fa fa-user"></i></span>
+														<span class="input-group-addon danger"><i class="fa fa-user"></i></span>
 														<input type="email" name="email" class="form-control" placeholder="Email người dùng" value="<?php echo $obj->email;?>" required>
 													</div>
 												  
 												</div>
 												<div class="form-group has-feedback left-feedback no-label">
 													<div class="input-group">
-														<span class="input-group-addon primary"><i class="fa fa-ticket"></i></span>
+														<span class="input-group-addon danger"><i class="fa fa-ticket"></i></span>
 														<input type="text" name="fullname"  class="form-control" placeholder="Họ và tên" value="<?php echo $obj->fullname;?>" required>
 													</div>
 												  
@@ -352,14 +353,14 @@
 												
 												<div class="form-group has-feedback left-feedback no-label">
 													<div class="input-group">
-														<span class="input-group-addon primary"><i class="fa fa-list-alt"></i></span>
+														<span class="input-group-addon danger"><i class="fa fa-list-alt"></i></span>
 														<input type="text" name="teaching"  class="form-control" placeholder="Bộ môn giảng dạy" value="<?php echo $obj->teaching;?>" required>
 													</div>
 												  
 												</div>
 												<div class="form-group has-feedback left-feedback no-label">
 													<div class="input-group">
-														<span class="input-group-addon primary"><i class="fa fa-tag"></i></span>
+														<span class="input-group-addon danger"><i class="fa fa-tag"></i></span>
 														<select data-placeholder="Chọn đơn vị..." class="form-control" name="unit_id" tabindex="2" required>
 															<option value="<?php echo $obj->unit_id;?>"><?php echo $obj->unit_name;?></option>
 															<?php 
@@ -377,7 +378,7 @@
 											<div class="col-sm-6">
 												<div class="form-group has-feedback left-feedback no-label">
 													<div class="input-group">
-														<span class="input-group-addon primary"><i class="fa fa-bullhorn"></i></span>
+														<span class="input-group-addon danger"><i class="fa fa-bullhorn"></i></span>
 														<textarea name="introduced" class="form-control"  rows="9" placeholder="Giới thiệu bản thân" required><?php echo $obj->introduced;?></textarea>
 													</div>
 												  
@@ -386,7 +387,7 @@
 												 <!-- kết thúc hiển thị tùy chọn -->
 											</div><!-- /.col-sm-6 -->
 										</div><!-- /.row -->
-										<button type="submit" name="submit_update_user" class="btn btn-primary btn-block btn-lg"><i class="fa fa-sign-in"></i> Cập nhật thông tin</button>
+										<button type="submit" name="submit_update_user" class="btn btn-danger btn-block btn-lg"><i class="fa fa-sign-in"></i> Cập nhật thông tin</button>
 									</form>
 									<?php
 									//ket thuc form chinh sua thong tin cua giang vien 
@@ -398,7 +399,7 @@
 												
 												<div class="form-group has-feedback left-feedback no-label">
 													<div class="input-group">
-														<span class="input-group-addon primary"><i class="fa fa-user"></i></span>
+														<span class="input-group-addon danger"><i class="fa fa-user"></i></span>
 														<input type="email" name="email" class="form-control" placeholder="Email người dùng" value="<?php echo $obj->email;?>" required>
 													</div>
 												  
@@ -407,14 +408,14 @@
 											<div class="col-sm-6">
 												<div class="form-group has-feedback left-feedback no-label">
 													<div class="input-group">
-														<span class="input-group-addon primary"><i class="fa fa-ticket"></i></span>
+														<span class="input-group-addon danger"><i class="fa fa-ticket"></i></span>
 														<input type="text" name="fullname"  class="form-control" placeholder="Họ và tên" value="<?php echo $obj->fullname;?>" required>
 													</div>
 												  
 												</div>
 											</div>
 										</div>
-										<button type="submit" name="submit_update_user2" class="btn btn-primary btn-block btn-lg"><i class="fa fa-sign-in"></i> Cập nhật thông tin</button>
+										<button type="submit" name="submit_update_user2" class="btn btn-danger btn-block btn-lg"><i class="fa fa-sign-in"></i> Cập nhật thông tin</button>
 									</form>
 									<?php }?>
 								</div>
@@ -429,24 +430,24 @@
 											<form method="post">
 												<div class="form-group">
 													<div class="input-group">
-														<span class="input-group-addon primary"><i class="fa fa-key"></i></span>
+														<span class="input-group-addon danger"><i class="fa fa-key"></i></span>
 														<input type="password" name="pass_old" class="form-control" placeholder="Mật khẩu cũ" required >
 													</div>
 												</div>
 												<div class="form-group">
 													<div class="input-group">
-														<span class="input-group-addon primary"><i class="fa fa-key"></i></span>
+														<span class="input-group-addon danger"><i class="fa fa-key"></i></span>
 														<input type="password" name="pass_new" class="form-control" placeholder="Mật khẩu mới" required >
 													</div>
 												</div>
 												<div class="form-group">
 													<div class="input-group">
-														<span class="input-group-addon primary"><i class="fa fa-check"></i></span>
+														<span class="input-group-addon danger"><i class="fa fa-check"></i></span>
 														<input type="password" name="repass_new" class="form-control" placeholder="Nhập lại mật khẩu"required >
 													</div>
 												</div>
 												<div class="form-group">
-												<button type="submit" name="submit_change_pass" class="btn btn-primary btn-block btn-lg"><i class="fa fa-refresh"></i> Đổi mật khẩu</button>
+												<button type="submit" name="submit_change_pass" class="btn btn-danger btn-block btn-lg"><i class="fa fa-refresh"></i> Đổi mật khẩu</button>
 												</div>
 
 											</form>
@@ -471,14 +472,14 @@
 											<div class="form-group has-feedback left-feedback no-label">
 												<div class="input-group">
 													<span class="input-group-btn">
-															<span class="btn btn-primary btn-file">
+															<span class="btn btn-danger btn-file">
 																<i class="fa fa-plus"></i><input type="file" class="form-control" name="avatar">
 															</span>
 													</span>
 													<input type="text" class="form-control" placeholder="Chọn ảnh đại diện" readonly>
 												</div><!-- /.input-group -->
 											</div>
-											<button type="submit" name="submit_avatar" class="btn btn-primary btn-block btn-lg"><i class="fa fa-refesh"></i>Đổi hình đại diện</button>
+											<button type="submit" name="submit_avatar" class="btn btn-danger btn-block btn-lg"><i class="fa fa-refesh"></i>Đổi hình đại diện</button>
 											</form>
 										<?php }else {
 													echo '<center><h4 class="scheme_color"> Tính năng này chỉ dành cho giảng viên! </h4></center>';
@@ -510,14 +511,14 @@
 												<div class="form-group">
 												<label> Ngày bắt đầu</label>
 													<div class="input-group">
-														<span class="input-group-addon primary"><i class="fa fa-clock-o"></i></span>
+														<span class="input-group-addon danger"><i class="fa fa-clock-o"></i></span>
 														<input type="date" name="date_start" class="form-control" value="<?php echo $date1 ;?>">
 													</div>
 												</div>
 												<div class="form-group">
 												
 													<div class="input-group">
-														<span class="input-group-addon primary"><i class="fa fa-asterisk"></i></span>
+														<span class="input-group-addon danger"><i class="fa fa-asterisk"></i></span>
 														<input type="time" name="time_start" class="form-control" value="<?php echo $time1 ;?>" >
 													</div>
 												</div>
@@ -526,14 +527,14 @@
 												<div class="form-group">
 												<label> Ngày kết thúc</label>
 													<div class="input-group">
-														<span class="input-group-addon primary"><i class="fa fa-clock-o"></i></span>
+														<span class="input-group-addon danger"><i class="fa fa-clock-o"></i></span>
 														<input type="date" name="date_end" class="form-control" value="<?php echo $date2 ;?>">
 													</div>
 												</div>
 												<div class="form-group">
 												
 													<div class="input-group">
-														<span class="input-group-addon primary"><i class="fa fa-asterisk"></i></span>
+														<span class="input-group-addon danger"><i class="fa fa-asterisk"></i></span>
 														<input type="time" name="time_end" class="form-control" value="<?php echo $time2 ;?>" >
 													</div>
 												</div>
@@ -549,7 +550,7 @@
 												</label>
 											</div>
 										</div>
-										<button type="submit" name="submit_time" class="btn btn-primary btn-block btn-lg"><i class="fa fa-gear"></i> Đặt thời gian</button>
+										<button type="submit" name="submit_time" class="btn btn-danger btn-block btn-lg"><i class="fa fa-gear"></i> Đặt thời gian</button>
 									</form>
 								</div>
 							</div><!-- /.tab-content -->
