@@ -6,6 +6,14 @@
 	
 	if(isset($_GET['id'])){
 		$id = $_GET['id'];
+		date_default_timezone_set('Asia/Ho_Chi_Minh');
+		$current = date('Y-m-d H:i:s', time());
+		//check thoi gian binh chon va chuc nang binh chon duoc kich hoat hay khong
+		$sql_v = $mysqli->query("SELECT * FROM `vote_time` WHERE `id` = '1'");
+		$obj_v = $sql_v->fetch_object();
+		$timestart = $obj_v->timestart;
+		$timeend = $obj_v->timeend;
+		$active = $obj_v->active;
 		//kiem tra xem có ton tia nguoi dung nay khong
 		$check_id = $mysqli->query("SELECT * FROM `account_info` WHERE `id` = '$id' AND status ='2'");
 		
@@ -125,8 +133,17 @@
 							</button>
 						</div>
 				';
-				}
-				if(isset($_SESSION['fullname'])){
+					}
+		if(isset($_SESSION['fullname'])){
+			if($active == 0){
+				echo '
+				<div class="clearfix m_bottom_15">
+					<button class="button_type_4 r_corners bg_scheme_color color_light tr_delay_hover f_left f_size_medium">
+					  Chức năng bình chọn đã đóng
+					</button>
+				</div>';
+			}else{
+				if(strtotime($current) > strtotime($timestart) && strtotime($current) < strtotime($timeend)) {
 					$tk_id = $_SESSION['account_id'];
 					$check_vote1 = $mysqli->query("SELECT * FROM `vote` WHERE `account_vote` = $tk_id");
 					$check_row1 = $check_vote1->fetch_row();
@@ -176,8 +193,17 @@
 							</div>';
 						}
 					}
+				}else{
+					echo '
+						<div class="clearfix m_bottom_15">
+							<button class="button_type_4 r_corners bg_scheme_color color_light tr_delay_hover f_left f_size_medium">
+							  Không phải thời gian bình chọn
+							</button>
+						</div>';
 				}
-				?>
+			}
+			}
+			?>
 				<hr class="divider_type_3 m_bottom_10">
 				<p class="m_bottom_10"><?php echo $obj->introduced;?></p>
 				
