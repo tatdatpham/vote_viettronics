@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50616
 File Encoding         : 65001
 
-Date: 2014-09-20 12:20:34
+Date: 2014-09-20 13:37:18
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -88,7 +88,6 @@ INSERT INTO `vote` VALUES ('2', '2', '3', '2014-09-19 14:57:34');
 INSERT INTO `vote` VALUES ('3', '7', '5', '2014-09-19 14:58:01');
 INSERT INTO `vote` VALUES ('4', '1', '6', '2014-09-19 14:58:11');
 INSERT INTO `vote` VALUES ('5', '3', '2', '2014-09-19 17:35:07');
-INSERT INTO `vote` VALUES ('6', '4', '1', '2014-09-20 10:37:25');
 
 -- ----------------------------
 -- View structure for account_info
@@ -100,4 +99,4 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost`  VIEW `account_info` AS SE
 -- View structure for vote_info
 -- ----------------------------
 DROP VIEW IF EXISTS `vote_info`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost`  VIEW `vote_info` AS SELECT vote.*, account_info.fullname as account_id_voted, account_info.unit_id, account_info.unit_name, account_info.avatar FROM `vote` JOIN account_info WHERE vote.account_id = account_info.id ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost`  VIEW `vote_info` AS SELECT vote.*, account_info.fullname as account_id_voted, account_info.unit_id, account_info.unit_name, account_info.avatar, account_info.`status` FROM `vote` JOIN account_info WHERE vote.account_id = account_info.id ;
