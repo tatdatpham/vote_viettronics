@@ -6,6 +6,10 @@
 		$id = $_GET['id'];
 		$errors = array();
 		$msg = array();
+		$warning = array();
+		//ngay tối thiểu để đặt lịch bình chọn
+		date_default_timezone_set('Asia/Ho_Chi_Minh');
+		$current = date('Y-m-d H:i:s', time());
 		//cap nhat thong tin nguoi dung( khong phai giang vien)
 		if(isset($_POST['submit_update_user2'])){
 			$email        = $mysqli->real_escape_string($_POST['email']);
@@ -112,7 +116,46 @@
 			}
 		}
 
-		
+
+		//set thoi gian binh chon
+		if(isset($_POST['submit_time']) && $_SESSION['status'] == 3){
+			$date_start = $mysqli->real_escape_string($_POST['date_start']);
+			$time_start = $mysqli->real_escape_string($_POST['time_start']);
+			$date_end   = $mysqli->real_escape_string($_POST['date_end']);
+			$time_end   = $mysqli->real_escape_string($_POST['time_end']);
+
+			//xu ly nhap lieu
+			$datetime= date('Y-m-d', strtotime($date_start));
+			$date_start = date('Y-m-d', strtotime($date_start));
+			$time_start = date('H:i:s', strtotime($time_start));
+			$date_end   = date('Y-m-d', strtotime($date_end));
+			$time_end   = date('H:i:s', strtotime($time_end));
+
+			$datetime_start = date('Y-m-d H:i:s', strtotime("$date_start $time_start"));
+			$datetime_end = date('Y-m-d H:i:s', strtotime("$date_end $time_end"));
+
+			if(strtotime($datetime_start) < strtotime($current)){
+				$errors[]="Ngày bắt đầu phải lớn hơn hoặc bằng ngày hiện tại.";
+			}
+			if(strtotime($datetime_start) > strtotime($datetime_end)){
+				$errors[]="Ngày bkết thúc phải lớn hơn hoặc bằng ngày hiện tại.";
+			}
+			if(count($errors) == 0){
+				if (!empty($_POST['enable'])) {
+					$sql4 = $mysqli->query("UPDATE `vote_time` SET `timestart` = '$datetime_start',`timeend` = '$datetime_end' ,`active` = '1' WHERE `id` = '1'");
+					$msg[] = "Đã đặt ngày bình chọn thành công!";
+					$msg[] = "Chức năng bình chọn đã bật!";
+				}else{
+					$sql4 = $mysqli->query("UPDATE `vote_time` SET `timestart` = '$datetime_start',`timeend` = '$datetime_end' ,`active` = '0' WHERE `id` = '1'");
+					$msg[] = "Đã đặt ngày bình chọn thành công!";
+					$warning[] = "Chức năng bình chọn đã tắt!";
+				}
+			}
+		}
+
+
+
+
 		if(isset($_SESSION['fullname'])){
 			//kiem tra nguoi dung co ton tai khong, co thi get info
 			$check = $mysqli->query("SELECT * FROM `account_info` WHERE `id` = '$id'");
@@ -198,6 +241,7 @@
 						<li><a href="#panel-friend" data-toggle="tab"><i class="fa fa-edit"></i></a></li>
 						<li><a href="#panel-pass" data-toggle="tab"><i class="fa fa-key"></i></a></li>
 						<li><a href="#panel-avatar" data-toggle="tab"><i class="fa fa-camera"></i></a></li>
+						<li><a href="#panel-clock" data-toggle="tab"><i class="fa fa-clock-o"></i></a></li>
 					</ul>
 				  </div>
 					<div id="panel-collapse-1" class="collapse in">
@@ -249,7 +293,7 @@
 											foreach($errors as $errors){ ?>
 												<div class="alert alert-danger alert-bold-border fade in alert-dismissable">
 												  	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-												  	<strong>Lỗi!</strong> <?php echo $errors ?></a>.
+												  	<strong>Lỗi : </strong> <?php echo $errors ?></a>.
 												</div>
 									<?php	}
 											unset($errors);
@@ -260,7 +304,19 @@
 											foreach($msg as $msg){ ?>
 												<div class="alert alert-success alert-bold-border fade in alert-dismissable">
 												  	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-												  	<strong>Thông báo!</strong> <?php echo $msg ?></a>.
+												  	<strong>Thông báo : </strong> <?php echo $msg ?></a>.
+												</div>
+									<?php	}
+											unset($msg);
+										}
+									?>
+
+									<?php	//Đưa thông báo thành công
+										if(count($warning) > 0){
+											foreach($warning as $warning){ ?>
+												<div class="alert alert-warning alert-bold-border fade in alert-dismissable">
+												  	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+												  	<strong>Cảnh báo : </strong> <?php echo $warning ?></a>.
 												</div>
 									<?php	}
 											unset($msg);
@@ -269,7 +325,7 @@
 								<!-- ke thuc hien thi thong bao tu form -->
 								</div><!-- /#panel-about -->
 
-
+								<!-- chinh sua thong tin ca nhan -->
 								<div class="tab-pane fade" id="panel-friend">
 									<h4 class="small-heading more-margin-bottom">Chỉnh sửa hồ sơ</h4>
 									<?php 
@@ -362,6 +418,9 @@
 									</form>
 									<?php }?>
 								</div>
+
+								<!-- doi mat khau-->
+
 								<div class="tab-pane fade" id="panel-pass">
 									<h4 class="small-heading more-margin-bottom">Đổi mật khẩu</h4>
 									<div class="row">
@@ -398,6 +457,8 @@
 									</div><!-- /.row -->
 								</div>
 
+								<!-- thay avatar cho giang vienn -->
+
 								<div class="tab-pane fade" id="panel-avatar">
 									<h4 class="small-heading more-margin-bottom">Đổi hình đại diện</h4>
 									
@@ -427,6 +488,69 @@
 										<div class="col-lg-3"></div>
 									</div>
 									
+								</div>
+
+								<!-- set time de binh chon -->
+								<?php 
+									$sql_t = $mysqli->query("SELECT * FROM `vote_time` WHERE `id` ='1'");
+									$obj_t = $sql_t->fetch_object();
+									$datetime1 = $obj_t->timestart;
+									$datetime2 = $obj_t->timeend;
+									$date1 = date('Y-m-d', strtotime($datetime1));
+									$time1 = date('H:i:s', strtotime($datetime1));
+									$date2 = date('Y-m-d', strtotime($datetime2));
+									$time2 = date('H:i:s', strtotime($datetime2));
+
+								?>
+								<div class="tab-pane fade" id="panel-clock">
+									<h4 class="small-heading more-margin-bottom">Đặt thời gian bình chọn</h4>
+									<form method="post">
+										<div class="row">
+											<div class="col-sm-6">
+												<div class="form-group">
+												<label> Ngày bắt đầu</label>
+													<div class="input-group">
+														<span class="input-group-addon primary"><i class="fa fa-clock-o"></i></span>
+														<input type="date" name="date_start" class="form-control" value="<?php echo $date1 ;?>">
+													</div>
+												</div>
+												<div class="form-group">
+												
+													<div class="input-group">
+														<span class="input-group-addon primary"><i class="fa fa-asterisk"></i></span>
+														<input type="time" name="time_start" class="form-control" value="<?php echo $time1 ;?>" >
+													</div>
+												</div>
+											</div>
+											<div class="col-sm-6">
+												<div class="form-group">
+												<label> Ngày kết thúc</label>
+													<div class="input-group">
+														<span class="input-group-addon primary"><i class="fa fa-clock-o"></i></span>
+														<input type="date" name="date_end" class="form-control" value="<?php echo $date2 ;?>">
+													</div>
+												</div>
+												<div class="form-group">
+												
+													<div class="input-group">
+														<span class="input-group-addon primary"><i class="fa fa-asterisk"></i></span>
+														<input type="time" name="time_end" class="form-control" value="<?php echo $time2 ;?>" >
+													</div>
+												</div>
+											</div>
+										</div><!-- /.row -->
+										<div class="form-group">
+											<label>Bật tắt tính năng bình chọn</label>
+											<div class="onoffswitch">
+												<input type="checkbox" name="enable" class="onoffswitch-checkbox" id="example-switch-4" <?php if($obj_t->active ==1) echo 'checked';?> >
+												<label class="onoffswitch-label" for="example-switch-4">
+													<span class="onoffswitch-inner"></span>
+													<span class="onoffswitch-switch"></span>
+												</label>
+											</div>
+										</div>
+										<button type="submit" name="submit_time" class="btn btn-primary btn-block btn-lg"><i class="fa fa-gear"></i> Đặt thời gian</button>
+									</form>
 								</div>
 							</div><!-- /.tab-content -->
 						</div><!-- /.panel-body -->
