@@ -1,0 +1,25 @@
+<IfModule mod_rewrite.c>    
+Options +FollowSymLinks   
+RewriteEngine on
+##RewriteBase /webapp/
+
+
+##RewriteRule ^profile-([a-zA-Z0-9_-]+).html$ profile.php?action=$2
+RewriteRule ^user-([0-9]+)\.html$ user.php?id=$1
+
+##
+##viet lai URL cho cac file .php
+##
+RewriteRule ^login  login.php [L]
+RewriteRule ^logout  logout.php [L]
+RewriteRule ^add-user  add-user.php [L]
+RewriteRule ^top  top.php [L]
+
+
+
+##Error
+ErrorDocument 404 /404.html
+</IfModule>
+
+
+
