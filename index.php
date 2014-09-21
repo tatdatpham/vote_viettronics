@@ -12,6 +12,7 @@
 	}
 	else{ 
 		$results = $mysqli->query("SELECT * FROM `account_info` WHERE `status` ='2'");
+		
 	}
 
 	

@@ -38,16 +38,7 @@
 		<section class="col-lg-9 col-md-9 col-sm-9 m_xs_bottom_30">
 			<!-- them moi guilde -->
 
-			<?php if(!isset($_SESSION['status'])){
-				echo '<h2> Không tìm thấy trang! 
-							<a href="'.$base_url.'" class="scheme_color"> 
-								<span class="d_inline_middle shop_icon m_mxs_right_0">
-									<i class="fa fa-mail-reply"></i>
-															
-								</span>Trở về 
-							</a>
-						</h2>';
-			}?>
+			
 
 			<?php if(isset($_GET['action']) && $_GET['action'] == 'add' && isset($_SESSION['status']) && $_SESSION['status'] == 3){?>
 				<div class="row">
@@ -148,12 +139,18 @@
 	</div>
 
 <script src="//code.jquery.com/jquery-1.9.1.min.js"></script> 
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script> 
+
 <script src="js/plugins/summernote/summernote.min.js"></script>
+<script src="js/jquery-2.1.0.min.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
 <script src="js/retina.js"></script>
 <script src="js/waypoints.min.js"></script>
+<script src="js/jquery.isotope.min.js"></script>
+<script src="js/jquery.tweet.min.js"></script>
+<script src="js/owl.carousel.min.js"></script>
 <script src="js/jquery.custom-scrollbar.js"></script>
-<script src="js/scripts.js"></script>
+
 
 <script type="text/javascript">
 $(document).ready(function() {
@@ -164,6 +161,11 @@ $(document).ready(function() {
 	  	focus: true,                 // set focus to editable area after initializing summernote
 	});
 });
+$('#shopping_button').on('mouseenter',function(){
+  $(this).css('z-index','300');
+ }).on('mouseleave',function(){
+  $(this).css('z-index','189');
+ });
 </script>
 	</body>
 </html>
