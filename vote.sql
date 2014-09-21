@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50616
 File Encoding         : 65001
 
-Date: 2014-09-21 00:29:14
+Date: 2014-09-21 09:31:16
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -30,8 +30,7 @@ CREATE TABLE `account` (
   `introduced` text NOT NULL,
   `status` int(5) DEFAULT '1',
   PRIMARY KEY (`id`),
-  KEY `unit_id` (`unit_id`),
-  CONSTRAINT `fk_unit_id1` FOREIGN KEY (`unit_id`) REFERENCES `unit` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `unit_id` (`unit_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -45,7 +44,6 @@ INSERT INTO `account` VALUES ('5', 'thongbm@gmail.com', 'e10adc3949ba59abbe56e05
 INSERT INTO `account` VALUES ('6', 'kunny171@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 'Phạm Tất Đạt', 'avatar-6.jpg', '1', 'Công nghệ phần mềm', 'Chiếc tablet Kindle Fire HDX 8.9\" của Amazon năm nay đã được nâng cấp mới với chip xử lý Snapdragon 805 nhanh hơn, cải tiến công nghệ âm thanh Dolby Atmos, chạy trên hệ điều hành Fire OS 4 mới nhất, pin 12 tiếng và có luôn tính năng tìm thông tin đồ vật Firefly vốn trước đây chỉ có trên điện thoại Fire của hãng này.', '2');
 INSERT INTO `account` VALUES ('7', 'sennt@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 'Nguyễn Thị Sen', 'avatar-7.jpg', '3', 'Mạng máy tính', 'Đúng như tên gọi của nó, Fire HD Kids Edition là một chiếc tablet dành riêng cho trẻ em và Amazon đã rất cố gắng làm cho nó phù hợp nhất có thể đối với lứa tuổi thiếu nhi. Mặc dù nó mắc hơn bản Fire HD thường 50 USD nhưng bù lại các bậc cha mẹ sẽ yên tâm hơn nhiều vì Amazon chấp nhận bảo hành tất cả mọi sự cố hỏng hóc trong vòng 2 năm và trả lại máy mới.', '2');
 INSERT INTO `account` VALUES ('8', 'test@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 'test', 'avatar-8.jpg', '3', 'Chế tạo máy', 'Khoa CNTT', '1');
-INSERT INTO `account` VALUES ('9', 'tatdat171@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 'admin', 'avatar-9.jpg', '1', 'Chế tạo máy', 'sssssssss', '2');
 
 -- ----------------------------
 -- Table structure for guide
