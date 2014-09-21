@@ -13,7 +13,6 @@
 		<link rel="icon" type="image/ico" href="images/fav.ico">
 		<!--stylesheet include-->
 		<link rel="stylesheet" type="text/css" media="all" href="css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" media="all" href="css/bootstrap.min-2.css">
 		<link rel="stylesheet" type="text/css" media="all" href="css/jquery.custom-scrollbar.css">
 		<link rel="stylesheet" type="text/css" media="all" href="css/owl.carousel.css">
 		<link rel="stylesheet" type="text/css" media="all" href="css/style.css">

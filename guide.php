@@ -23,7 +23,9 @@
 		<ul class="horizontal_list clearfix bc_list f_size_medium">
 			<li class="m_right_10 current"><a href="<?php echo $base_url;?>" class="default_t_color">Trang chủ<i class="fa fa-angle-right d_inline_middle m_left_10"></i></a></li>
 			<li class="m_right_10"><a href="<?php echo $base_url;?>guide.html" class="default_t_color">Hướng dẫn</a><i class="fa fa-angle-right d_inline_middle m_left_10"></i></li>
-			<li class="m_right_10"><a href="<?php echo $base_url;?>add-guide.html" class="default_t_color">Thêm hướng dẫn mới</a><i class="fa fa-angle-right d_inline_middle m_left_10"></i></li>
+			<?php if(isset($_GET['action']) && $_SESSION['status'] ==3){
+				echo '<li class="m_right_10"><a href="'.$base_url.'add-guide.html" class="default_t_color">Thêm hướng dẫn mới</a></li>';
+			}?>
 			
 		</ul>
 	</div>
@@ -106,6 +108,9 @@
 						</div>
 						
 					</div><!-- /.tab-content -->
+					<?php  if($_SESSION['status'] ==3){
+						echo '<a href="'.$base_url.'add-guide.html" class="f_right btn btn-danger btn-lg"><i class="fa fa-plus"></i>Thêm hướng dẫn</a>';
+					}?>
 				</div><!-- /.col-sm-9 col-sm-8 -->
 			</div><!-- /.row -->
 

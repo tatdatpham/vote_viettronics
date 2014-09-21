@@ -180,7 +180,7 @@
 		<div class="row clearfix">
 			<!--left content column-->
 			<section class="col-lg-9 col-md-9 col-sm-9">
-			<?php if(empty($_GET['action'])){?>
+			<?php if(empty($_GET['action']) && $_SESSION['status'] == '3' ){?>
 				<div class="row">	
 				<form role="form" method="POST" enctype="multipart/form-data">
 					<div class="row">
@@ -257,6 +257,8 @@
 					</div><!-- /.row -->
 					<button type="submit" name="submit_new_user" class="btn btn-danger btn-block btn-lg"><i class="fa fa-sign-in"></i> Thêm giảng viên mới</button>
 				</form>
+					<br>
+					<a href="<?php echo $base_url;?>import-user.html" class="btn btn-danger btn-block btn-lg"><i class="fa fa-share-square-o"></i> Import từ file Excel</a>
 				</div>
 				<br>
 
@@ -281,6 +283,8 @@
 							</div>
 							<button type="submit" name="import_user" class="btn btn-danger btn-block btn-lg"><i class="fa fa-sign-in"></i> Thêm từ file EXCEL</button>
 						</form>
+						<br>
+						<h4>Bạn có thể tải về file Import mẫu <a href="<?php echo $base_url;?>tmp/import-template.zip">tại đây.</a></h4>
 					</div>
 					<div class="col-lg-6 cold-sm-6">
 					<center class="scheme_color"><h3>Import Giảng viên</h3></center><br>
@@ -298,6 +302,7 @@
 							<button type="submit" name="import_gv" class="btn btn-danger btn-block btn-lg"><i class="fa fa-sign-in"></i> Thêm từ file EXCEL</button>
 						</form>
 					</div>
+					
 				</div>
 				<?php } ?>
 				<div class="row">
