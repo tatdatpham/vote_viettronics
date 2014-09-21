@@ -6,7 +6,7 @@
 	
 	//them huong dan
 	$msg = array();
-	if(isset($_GET['action']) && $_GET['action'] == 'add' && $_SESSION['status'] == 3 && isset($_POST['submit_question'])){
+	if(isset($_GET['action']) && $_GET['action'] == 'add' && isset($_SESSION['status']) && $_SESSION['status'] == 3 && isset($_POST['submit_question'])){
 		$title    = $mysqli->real_escape_string($_POST['title']);
 		$content  = $mysqli->real_escape_string($_POST['content']);
 		$sql = $mysqli->query("INSERT INTO `guide`(`title`,`content`) VALUES ('$title','$content')");
@@ -23,7 +23,7 @@
 		<ul class="horizontal_list clearfix bc_list f_size_medium">
 			<li class="m_right_10 current"><a href="<?php echo $base_url;?>" class="default_t_color">Trang chủ<i class="fa fa-angle-right d_inline_middle m_left_10"></i></a></li>
 			<li class="m_right_10"><a href="<?php echo $base_url;?>guide.html" class="default_t_color">Hướng dẫn</a><i class="fa fa-angle-right d_inline_middle m_left_10"></i></li>
-			<?php if(isset($_GET['action']) && $_SESSION['status'] ==3){
+			<?php if(isset($_GET['action']) && isset($_SESSION['status']) && $_SESSION['status'] ==3){
 				echo '<li class="m_right_10"><a href="'.$base_url.'add-guide.html" class="default_t_color">Thêm hướng dẫn mới</a></li>';
 			}?>
 			
@@ -36,10 +36,20 @@
 	<div class="row clearfix">
 		<!--left content column-->
 		<section class="col-lg-9 col-md-9 col-sm-9 m_xs_bottom_30">
-			
 			<!-- them moi guilde -->
 
-			<?php if(isset($_GET['action']) && $_GET['action'] == 'add' && $_SESSION['status'] == 3){?>
+			<?php if(!isset($_SESSION['status'])){
+				echo '<h2> Không tìm thấy trang! 
+							<a href="'.$base_url.'" class="scheme_color"> 
+								<span class="d_inline_middle shop_icon m_mxs_right_0">
+									<i class="fa fa-mail-reply"></i>
+															
+								</span>Trở về 
+							</a>
+						</h2>';
+			}?>
+
+			<?php if(isset($_GET['action']) && $_GET['action'] == 'add' && isset($_SESSION['status']) && $_SESSION['status'] == 3){?>
 				<div class="row">
 					<div class="col-lg-12">
 					<form role="form" method="post">
@@ -108,7 +118,7 @@
 						</div>
 						
 					</div><!-- /.tab-content -->
-					<?php  if($_SESSION['status'] ==3){
+					<?php  if( isset($_SESSION['status']) && $_SESSION['status'] ==3){
 						echo '<a href="'.$base_url.'add-guide.html" class="f_right btn btn-danger btn-lg"><i class="fa fa-plus"></i>Thêm hướng dẫn</a>';
 					}?>
 				</div><!-- /.col-sm-9 col-sm-8 -->
@@ -140,6 +150,10 @@
 <script src="//code.jquery.com/jquery-1.9.1.min.js"></script> 
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script> 
 <script src="js/plugins/summernote/summernote.min.js"></script>
+<script src="js/retina.js"></script>
+<script src="js/waypoints.min.js"></script>
+<script src="js/jquery.custom-scrollbar.js"></script>
+<script src="js/scripts.js"></script>
 
 <script type="text/javascript">
 $(document).ready(function() {

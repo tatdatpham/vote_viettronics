@@ -41,10 +41,10 @@
 				<!--sort-->
 				<div class="row clearfix m_bottom_10">
 					<div class="col-lg-7 col-md-8 col-sm-12 m_sm_bottom_10">
-						<p class="d_inline_middle f_size_medium">Sắp xếp theo:</p>
+						<p class="d_inline_middle f_size_medium">Tất cả giảng viên:</p>
 						<div class="clearfix d_inline_middle m_left_10">
 						
-							<button class="button_type_7 bg_light_color_1 color_dark tr_all_hover r_corners mw_0 box_s_none bg_cs_hover f_left m_left_5"><i class="fa fa-sort-amount-asc m_left_0 m_right_0"></i></button>
+							<a href="<?php echo $base_url;?>"><button class="button_type_7 bg_light_color_1 color_dark tr_all_hover r_corners mw_0 box_s_none bg_cs_hover f_left m_left_5"><i class="fa fa-sitemap m_left_0 m_right_0"></i></button></a>
 						</div>
 						<!--manufacturer select-->
 						<div class="custom_select f_size_medium relative d_inline_middle m_left_15 m_xs_left_5 m_mxs_left_0 m_mxs_top_10">

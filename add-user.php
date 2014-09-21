@@ -38,8 +38,10 @@
 									$c3 = $data->sheets[0]["cells"][$x][3];
 									$c4 = $data->sheets[0]["cells"][$x][4];
 									$c5 = $data->sheets[0]["cells"][$x][5];
-								$sql_i = $mysqli->query("INSERT INTO `account`(`email`,`password`,`fullname`,`teaching`,`introduced`,`status`) 
-									VALUES ('$c1','$c2','$c3','$c4','$c5','2')");
+									$c6 = $data->sheets[0]["cells"][$x][6];
+									$c7 = $data->sheets[0]["cells"][$x][7];
+								$sql_i = $mysqli->query("INSERT INTO `account`(`email`,`password`,`fullname`,`avatar`,`unit_id`,`teaching`,`introduced`,`status`) 
+									VALUES ('$c1','$c2','$c3','$c4','$c5','$c6','$c7','2')");
 								
 								}
 								if (!$sql_i) {

@@ -46,11 +46,11 @@
 								<p class="f_size_small color_dark">Cao Đẳng Công Nghệ <b>VIETTRONICS</b></p>
 							</div>
 							<nav class="col-lg-4 col-md-4 col-sm-5 t_align_r t_xs_align_c">
-								<ul class="d_inline_b horizontal_list clearfix f_size_small users_nav">
+								<ul class="d_inline_b horizontal_list clearfix f_size_small users_nav scheme_color">
 									<?php
 									if(!isset($_SESSION['fullname'])){
-										echo '<li><a href="#" data-popup="#login_popup" style="color:#29AF8E;">Đăng nhập</a></li>';
-										echo '<li><a href="#" data-popup="#login_popup" style="color:#29AF8E;">Đăng ký</a></li>';
+										echo '<li><a href="#" data-popup="#login_popup" >Đăng nhập</a></li>';
+										echo '<li><a href="#" data-popup="#login_popup" >Đăng ký</a></li>';
 									}else{
 
 										echo '<li>Xin chào <a href="'.$base_url.'profile.html" ><strong>'.$_SESSION['fullname'].'</strong></a></li>';
@@ -138,14 +138,14 @@
 						<!--main menu-->
 						<nav role="navigation" class="f_left f_xs_none d_xs_none">	
 							<ul class="horizontal_list main_menu clearfix">
-								<li class="current relative f_xs_none m_xs_bottom_5"><a href="<?php echo $base_url;?>" class="tr_delay_hover color_light tt_uppercase"><b>Trang chủ</b></a></li>
+								<li class="<?php if($_SERVER['REQUEST_URI']=='/vote/' || strpos($_SERVER['REQUEST_URI'],'unit')== TRUE){ echo 'current';}?> relative f_xs_none m_xs_bottom_5"><a href="<?php echo $base_url;?>" class="tr_delay_hover color_light tt_uppercase"><b>Trang chủ</b></a></li>
 								<li class="relative f_xs_none m_xs_bottom_5"><a href="#" class="tr_delay_hover color_light tt_uppercase"><b>Mục đích - Yêu cầu</b></a></li>
 								<li class="relative  f_xs_none m_xs_bottom_5"><a href="#" class="tr_delay_hover color_light tt_uppercase"><b>Đối tượng - Tiêu chuẩn</b></a></li>
-								<li class="relative f_xs_none m_xs_bottom_5"><a href="guide.html" class="tr_delay_hover color_light tt_uppercase"><b>Hướng dẫn</b></a></li>
+								<li class="<?php if(strpos($_SERVER['REQUEST_URI'],'guide.html')== TRUE){ echo 'current';}?> relative f_xs_none m_xs_bottom_5"><a href="guide.html" class="tr_delay_hover color_light tt_uppercase"><b>Hướng dẫn</b></a></li>
 								<?php if(isset($_SESSION['status'])){
-									if($_SESSION['status'] == 3){
-									echo '<li class="relative f_xs_none m_xs_bottom_5"><a href="'.$base_url.'add-user.html" class="tr_delay_hover color_light tt_uppercase"><b>Thêm giảng viên</b></a></li>';
-									}
+									if($_SESSION['status'] == 3){?>
+									<li class="<?php if($_SERVER['REQUEST_URI'] == "/vote/add-user.html" || $_SERVER['REQUEST_URI'] == "/vote/import-user.html"){ echo 'current';}?> relative f_xs_none m_xs_bottom_5"><a href="<?php echo $base_url?>add-user.html" class="tr_delay_hover color_light tt_uppercase"><b>Thêm giảng viên</b></a></li>
+								<?php	}
 								}
 								?>
 							</ul>

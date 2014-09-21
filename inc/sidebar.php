@@ -10,6 +10,12 @@
 		<div class="widget_content">
 			<!--Categories list-->
 			<ul class="categories_list">
+				<li>
+					<a href="<?php echo $base_url;?>" class="f_size_large color_dark d_block relative">
+							Tất cả
+							<span class="bg_light_color_1 r_corners f_right color_dark talign_c"></span>
+						</a>
+					</li>
 			<?php 
 				$sql_u2 = $mysqli->query("SELECT * FROM `unit`");
 				while ($obj_u2 = $sql_u2->fetch_object()) {
