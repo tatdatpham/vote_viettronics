@@ -1,12 +1,101 @@
 <?php 
-	$title ='Thêm giảng viên mới - Hệ thống bình chọn giảng viên trường Cao đẳng Viettronics';
-	include('inc/header.php'); 
+	
+	if(isset($_GET['action'])){
+		$title ='Import người dùng - Hệ thống bình chọn giảng viên trường Cao đẳng Viettronics';
+	}else{
+		$title ='Thêm giảng viên mới - Hệ thống bình chọn giảng viên trường Cao đẳng Viettronics';	
+	}
+	include('inc/header.php');
+	require_once 'inc/excel_reader2.php';
 	if(isset($_SESSION['fullname'])){
 		if($_SESSION['status'] == 3){
 			include('inc/menu.php'); 
 
 			$errors = array();
 			$msg = array();
+			if(isset($_GET['action']) && $_GET['action'] == 'import'){
+				//import giang vien
+				if(isset($_POST['import_gv'])){
+					if(!empty($_FILES['excel'])){
+						$file_ext=strtolower(end(explode('.',$_FILES['excel']['name'])));
+						$extensions = array("xls"); // dinh dang duoc phep upload
+						$path = "tmp/"; // Thu muc lưu file
+						$name = $_FILES['excel']['name'];
+						if ($_FILES['excel']['error'] == 0) {
+							if(in_array($file_ext,$extensions )=== false){
+								$errors[] = 'Chỉ upload file xls / xlsx!.';
+							}
+							if(count($errors) == 0){
+								move_uploaded_file($_FILES["excel"]["tmp_name"], $path.$name);
+								$filename = 'tmp/'.$name;
+								$data = new Spreadsheet_Excel_Reader();
+								$data->setUTFEncoder('mb');
+								$data->read($filename);
+								for ($x = 2; $x <= count($data->sheets[0]["cells"]); $x++) {
+									$c1 = $data->sheets[0]["cells"][$x][1];
+									$c2 = $data->sheets[0]["cells"][$x][2];
+									$c2 = md5($c2);
+									$c3 = $data->sheets[0]["cells"][$x][3];
+									$c4 = $data->sheets[0]["cells"][$x][4];
+									$c5 = $data->sheets[0]["cells"][$x][5];
+								$sql_i = $mysqli->query("INSERT INTO `account`(`email`,`password`,`fullname`,`teaching`,`introduced`,`status`) 
+									VALUES ('$c1','$c2','$c3','$c4','$c5','2')");
+								
+								}
+								if (!$sql_i) {
+									die('Invalid query: ' . mysql_error());
+								} else{
+									unlink($path.$name);
+								   	$msg[] ="Đã import giảng viên thành công";
+								}
+							}
+
+
+						}
+					}
+				}
+
+
+				//import nguoi dung
+				if(isset($_POST['import_user'])){
+					if(!empty($_FILES['excel'])){
+						$file_ext=strtolower(end(explode('.',$_FILES['excel']['name'])));
+						$extensions = array("xls"); // dinh dang duoc phep upload
+						$path = "tmp/"; // Thu muc lưu file
+						$name = $_FILES['excel']['name'];
+						if ($_FILES['excel']['error'] == 0) {
+							if(in_array($file_ext,$extensions )=== false){
+								$errors[] = 'Chỉ upload file xls / xlsx!.';
+							}
+							if(count($errors) == 0){
+								move_uploaded_file($_FILES["excel"]["tmp_name"], $path.$name);
+								$filename = 'tmp/'.$name;
+								$data = new Spreadsheet_Excel_Reader();
+								$data->setUTFEncoder('mb');
+								$data->read($filename);
+								for ($x = 2; $x <= count($data->sheets[0]["cells"]); $x++) {
+									$c1 = $data->sheets[0]["cells"][$x][1];
+									$c2 = $data->sheets[0]["cells"][$x][2];
+									$c2 = md5($c2);
+									$c3 = $data->sheets[0]["cells"][$x][3];
+									
+								$sql_i = $mysqli->query("INSERT INTO `account`(`email`,`password`,`fullname`,`status`) 
+									VALUES ('$c1','$c2','$c3','1')");
+								
+								}
+								if (!$sql_i) {
+									die('Invalid query: ' . mysql_error());
+								} else{
+									unlink($path.$name);
+								   	$msg[] ="Đã import người dùng thành công";
+								}
+							}
+
+
+						}
+					}
+				}
+			}
 			if(isset($_POST['submit_new_user'])){
 
 				$email        = $mysqli->real_escape_string($_POST['email']);
@@ -77,7 +166,11 @@
 		<ul class="horizontal_list clearfix bc_list f_size_medium">
 			<li class="m_right_10 current"><a href="<?php echo $base_url;?>" class="default_t_color">Trang chủ<i class="fa fa-angle-right d_inline_middle m_left_10"></i></a></li>
 			<li class="m_right_10"><a href="#" class="default_t_color">Giảng viên</a><i class="fa fa-angle-right d_inline_middle m_left_10"></i></li>
-			<li><a href="<?php echo $base_url;?>add-user" class="default_t_color">Thêm giảng viên mới</a></li>
+			<?php if(isset($_GET['action'])){
+				echo '<li><a href="'.$base_url.'import-user.html" class="default_t_color">Import người dùng</a></li>';
+			}else{
+				echo '<li><a href="'.$base_url.'add-user,html" class="default_t_color">Thêm giảng viên mới</a></li>';
+			}?>
 		</ul>
 	</div>
 </section>
@@ -87,7 +180,7 @@
 		<div class="row clearfix">
 			<!--left content column-->
 			<section class="col-lg-9 col-md-9 col-sm-9">
-
+			<?php if(empty($_GET['action'])){?>
 				<div class="row">	
 				<form role="form" method="POST" enctype="multipart/form-data">
 					<div class="row">
@@ -166,6 +259,47 @@
 				</form>
 				</div>
 				<br>
+
+				<?php }?>
+				<!-- Ket thuc them giang vien -->
+
+				<!-- them nguoi dung tu file excel -->
+				<?php if(isset($_GET['action']) && $_GET['action'] == 'import' && $_SESSION['status'] == '3'){?>
+				<div class="row">
+					<div class="col-lg-6 cold-sm-6">
+					<center class="scheme_color"><h3>Import người dùng</h3></center><br>
+						<form role="form" method="POST" enctype="multipart/form-data">
+							<div class="form-group has-feedback left-feedback no-label">
+								<div class="input-group">
+									<span class="input-group-btn">
+											<span class="btn btn-danger btn-file">
+												<i class="fa fa-plus"></i><input type="file" class="form-control" name="excel">
+											</span>
+									</span>
+									<input type="text" class="form-control" placeholder="Chọn file EXCEL để import" readonly>
+								</div><!-- /.input-group -->
+							</div>
+							<button type="submit" name="import_user" class="btn btn-danger btn-block btn-lg"><i class="fa fa-sign-in"></i> Thêm từ file EXCEL</button>
+						</form>
+					</div>
+					<div class="col-lg-6 cold-sm-6">
+					<center class="scheme_color"><h3>Import Giảng viên</h3></center><br>
+						<form role="form" method="POST" enctype="multipart/form-data">
+							<div class="form-group has-feedback left-feedback no-label">
+								<div class="input-group">
+									<span class="input-group-btn">
+											<span class="btn btn-danger btn-file">
+												<i class="fa fa-plus"></i><input type="file" class="form-control" name="excel">
+											</span>
+									</span>
+									<input type="text" class="form-control" placeholder="Chọn file EXCEL để import" readonly>
+								</div><!-- /.input-group -->
+							</div>
+							<button type="submit" name="import_gv" class="btn btn-danger btn-block btn-lg"><i class="fa fa-sign-in"></i> Thêm từ file EXCEL</button>
+						</form>
+					</div>
+				</div>
+				<?php } ?>
 				<div class="row">
 					<?php	//Đưa thông báo gặp lỗi nào
 						if(is_array($errors) > 0){

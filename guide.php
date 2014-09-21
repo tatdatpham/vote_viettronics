@@ -3,6 +3,7 @@
 	
 	include('inc/header.php'); 
 	include('inc/menu.php'); 
+	
 	//them huong dan
 	$msg = array();
 	if(isset($_GET['action']) && $_GET['action'] == 'add' && $_SESSION['status'] == 3 && isset($_POST['submit_question'])){

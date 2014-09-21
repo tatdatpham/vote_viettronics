@@ -16,6 +16,7 @@ RewriteRule ^profile-([0-9]+)\.html$ profile.php?id=$1
 RewriteRule ^login.html  login.php [L]
 RewriteRule ^logout.html  logout.php [L]
 RewriteRule ^add-user.html  add-user.php [L]
+RewriteRule ^import-user.html  add-user.php?action=import [L]
 RewriteRule ^top.html  top.php [L]
 RewriteRule ^profile.html  profile.php [L]
 RewriteRule ^guide.html  guide.php [L]
