@@ -35,7 +35,7 @@
 		<div class="row clearfix">
 			<!--left content column-->
 			<section class="col-lg-9 col-md-9 col-sm-9">
-				<img class="r_corners m_bottom_40" src="images/category_img_1.jpg" alt="">
+				<img class="r_corners m_bottom_40" src="images/banner.jpg" alt="">
 				<!--categories nav-->
 
 				
@@ -94,7 +94,7 @@
 									$obj_v = $sql_v->fetch_object();
 
 									echo '
-									<h5 class="m_bottom_10"><a href="'.$base_url.'user-'.$obj->id.'.html" class="color_dark">GV. '.$obj->fullname.' </a></h5>
+									<h5 class="m_bottom_10"><a href="'.$base_url.'user.php?id='.$obj->id.'" class="color_dark">GV. '.$obj->fullname.' </a></h5>
 									<p><span class="scheme_color"> '.$obj_v->vote.' phiếu</span></p>';
 									echo'
 								</figcaption>
@@ -137,7 +137,7 @@
 												</tr>
 											</table>
 											<hr class="divider_type_3 m_bottom_10">
-											<p class="m_bottom_10">'.mb_substr($obj->introduced,0,225).'...... <a href="'.$base_url.'user-'.$obj->id.'.html" class="scheme_color">(Xem tiếp)</a></p>
+											<p class="m_bottom_10">'.mb_substr($obj->introduced,0,225).'...... <a href="'.$base_url.'user.php?id='.$obj->id.'" class="scheme_color">(Xem tiếp)</a></p>
 											<hr class="divider_type_3 m_bottom_15">
 											<div class="m_bottom_15">';
 											echo 	'Lượt bình chọn: <span class="v_align_b f_size_big m_left_5 scheme_color fw_medium">'.$obj_v->vote.'</span>

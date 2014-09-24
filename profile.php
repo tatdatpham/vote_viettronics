@@ -13,14 +13,14 @@
 		$current = date('Y-m-d H:i:s', time());
 		//cap nhat thong tin nguoi dung( khong phai giang vien)
 		if(isset($_POST['submit_update_user2'])){
-			$email        = $mysqli->real_escape_string($_POST['email']);
+			$account        = $mysqli->real_escape_string($_POST['account']);
 			$fullname     = $mysqli->real_escape_string($_POST['fullname']);
-			$check_e        = $mysqli->query("SELECT * FROM `account_info` WHERE `email` = '$email' AND `id` <> '$id'");
+			$check_e        = $mysqli->query("SELECT * FROM `account_info` WHERE `account` = '$account' AND `id` <> '$id'");
 			$check_email    = $check_e->fetch_row();
 			if($check_email != 0){
-				$errors = 'Email '.$email.' đã được sử dụng';
+				$errors = 'Tài khoản '.$account.' đã được sử dụng';
 			}else{
-				$sql3 = $mysqli->query("UPDATE `account` SET `fullname` ='$fullname', `email` = '$email' WHERE `id` = '$id'");
+				$sql3 = $mysqli->query("UPDATE `account` SET `fullname` ='$fullname', `account` = '$account' WHERE `id` = '$id'");
 				$msg[] = 'Đã cập nhật thông tin thành công!';
 			}
 		}
@@ -221,8 +221,9 @@
 							<p class="text-muted">Bộ môn :  <a href="#fakelink">'.$obj->teaching.'</a></p>';
 						}?>
 						<p class="right-button">
+						<a href="<?php echo $base_url;?>manager.php" class="btn btn-danger btn-sm">Quản lý tài khoản</a>
 						<a href="#panel-friend" data-toggle="tab" class="btn btn-danger btn-sm">Sửa hồ sơ</a>
-						<a href="mailto:<?php echo $obj->email;?>" class="btn btn-danger btn-sm"><i class="fa fa-envelope"></i></a>
+						<a href="mailto:<?php echo $obj->account;?>" class="btn btn-danger btn-sm"><i class="fa fa-envelope"></i></a>
 						</p>
 					</div><!-- /.profile-info -->
 				</div><!-- /.the-box .transparent .profile-heading -->
@@ -252,9 +253,9 @@
 										</div>
 									</div><!-- /.form-group -->
 									<div class="form-group">
-										<label class="col-sm-2 control-label">Email</label>
+										<label class="col-sm-2 control-label">Tài khoản</label>
 										<div class="col-sm-10">
-										  <p class="form-control-static"><a href="mailto:<?php echo $obj->email;?>"><?php echo $obj->email;?></p></a>
+										  <p class="form-control-static"><a href="mailto:<?php echo $obj->account;?>"><?php echo $obj->account;?></p></a>
 										</div>
 									</div><!-- /.form-group -->
 									<!-- tuy chon hien thi them thong tin voi nguoi dung la giang vien -->
@@ -387,7 +388,7 @@
 												<div class="form-group has-feedback left-feedback no-label">
 													<div class="input-group">
 														<span class="input-group-addon danger"><i class="fa fa-user"></i></span>
-														<input type="email" name="email" class="form-control" placeholder="Email người dùng" value="<?php echo $obj->email;?>" required>
+														<input type="text" name="account" class="form-control" placeholder="Tài khoản người dùng" value="<?php echo $obj->account;?>" required>
 													</div>
 												  
 												</div>

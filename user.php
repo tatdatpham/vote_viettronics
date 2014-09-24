@@ -225,7 +225,7 @@
 		?>
 			<figure class="r_corners photoframe shadow relative d_xs_inline_b tr_all_hover">
 				<!--product preview-->
-				<a href="<?php echo $base_url.'user-'.$obj_r->id.'.html';?>" class="d_block relative pp_wrap">
+				<a href="<?php echo $base_url.'user.php?id='.$obj_r->id;?>" class="d_block relative pp_wrap">
 					<!--hot product-->
 					
 					<img src="images/avatar/<?php echo $obj_r->avatar;?>" class="tr_all_hover" height="242" width="242" alt="">
@@ -239,7 +239,7 @@
 				?>
 
 				<figcaption><center>
-					<h5 class="m_bottom_10"><a href="<?php echo $base_url.'user-'.$obj_r->id.'.html';?>" class="scheme_color"><?php echo $obj_r->fullname;?></a></h5>
+					<h5 class="m_bottom_10"><a href="<?php echo $base_url.'user.php?id='.$obj_r->id;?>" class="scheme_color"><?php echo $obj_r->fullname;?></a></h5>
 					<div class="clearfix">
 						<span class="scheme_color f_size_large m_bottom_15"><?php echo $obj_v->vote;?></span> phiếu
 						

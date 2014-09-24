@@ -40,7 +40,7 @@
 									$c5 = $data->sheets[0]["cells"][$x][5];
 									$c6 = $data->sheets[0]["cells"][$x][6];
 									$c7 = $data->sheets[0]["cells"][$x][7];
-								$sql_i = $mysqli->query("INSERT INTO `account`(`email`,`password`,`fullname`,`avatar`,`unit_id`,`teaching`,`introduced`,`status`) 
+								$sql_i = $mysqli->query("INSERT INTO `account`(`account`,`password`,`fullname`,`avatar`,`unit_id`,`teaching`,`introduced`,`status`) 
 									VALUES ('$c1','$c2','$c3','$c4','$c5','$c6','$c7','2')");
 								
 								}
@@ -81,7 +81,7 @@
 									$c2 = md5($c2);
 									$c3 = $data->sheets[0]["cells"][$x][3];
 									
-								$sql_i = $mysqli->query("INSERT INTO `account`(`email`,`password`,`fullname`,`status`) 
+								$sql_i = $mysqli->query("INSERT INTO `account`(`account`,`password`,`fullname`,`status`) 
 									VALUES ('$c1','$c2','$c3','1')");
 								
 								}
@@ -100,7 +100,7 @@
 			}
 			if(isset($_POST['submit_new_user'])){
 
-				$email        = $mysqli->real_escape_string($_POST['email']);
+				$account        = $mysqli->real_escape_string($_POST['account']);
 				$fullname     = $mysqli->real_escape_string($_POST['fullname']);
 				$password     = md5($mysqli->real_escape_string($_POST['password']));
 		        $unit_id  	  = $mysqli->real_escape_string($_POST['unit_id']);
@@ -109,7 +109,7 @@
 		        if(strlen($_POST['password']) < 6)
 					$errors[] = 'Mật khẩu có tối thiểu 6 ký tự.';
 		        //kiem tra email da duoc su dung chua
-		    	$check_e        = $mysqli->query("SELECT * FROM `account_info` WHERE `email` = '$email'");
+		    	$check_e        = $mysqli->query("SELECT * FROM `account_info` WHERE `account` = '$account'");
 				$check_email    = $check_e->fetch_row();
 				if($check_email != 0){
 					$errors = 'Email '.$email.' đã được sử dụng';
@@ -144,8 +144,8 @@
 								//upload file vao thu muc
 								move_uploaded_file($_FILES["avatar"]["tmp_name"], $path.$name);
 								//cap nhat bang account
-								$mysqli->query("INSERT INTO `account`(`email`,`fullname`,`password`,`avatar`,`unit_id`,`teaching`,`introduced`,`status`) 
-									VALUES ('$email','$fullname','$password','$name','$unit_id','$teaching','$introduced','2')");
+								$mysqli->query("INSERT INTO `account`(`account`,`fullname`,`password`,`avatar`,`unit_id`,`teaching`,`introduced`,`status`) 
+									VALUES ('$account','$fullname','$password','$name','$unit_id','$teaching','$introduced','2')");
 								$msg[] = 'Đã thêm thành công giảng viên mới!';
 								
 						    }
@@ -191,7 +191,7 @@
 							<div class="form-group has-feedback left-feedback no-label">
 								<div class="input-group">
 									<span class="input-group-addon danger"><i class="fa fa-user"></i></span>
-									<input type="email" name="email" class="form-control" placeholder="Email người dùng" required>
+									<input type="text" name="account" class="form-control" placeholder="Tài khoản người dùng" required>
 								</div>
 							  
 							</div>

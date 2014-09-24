@@ -1,20 +1,19 @@
 <?php
 	$errors=array();
 	if(isset($_POST['submit_login'])){ 
-		$email = $mysqli->real_escape_string($_POST['email']);
+		$account = $mysqli->real_escape_string($_POST['account']);
 		$password = md5($mysqli->real_escape_string($_POST['password']));
 		
-		$check_user = $mysqli->query("SELECT * FROM account WHERE `email` ='$email' and `password` = '$password'"); 
+		$check_user = $mysqli->query("SELECT * FROM account WHERE `account` ='$account' and `password` = '$password'"); 
 		//kiem tra username da duoc dung chua
 		$check_user_row = $check_user->fetch_row();
 		if($check_user_row == 0){
 			$errors[] = "Email hoặc mật khẩu bạn nhập không đúng";
 		} else{
 			
-			$info_user = $mysqli->query("SELECT * FROM account WHERE email ='$email' and password = '$password'");
+			$info_user = $mysqli->query("SELECT * FROM account WHERE account ='$account' and password = '$password'");
 			$row= $info_user->fetch_object();
-			$_SESSION['account'] = TRUE;
-			$_SESSION['email'] = $row->email;
+			$_SESSION['account'] = $row->account;
 			$_SESSION['fullname'] = $row->fullname;
 			$_SESSION['account_id']   = $row->id;
 			$_SESSION['avatar']   = $row->avatar;
@@ -53,7 +52,7 @@
 										echo '<li><a href="#" data-popup="#login_popup" >Đăng ký</a></li>';
 									}else{
 
-										echo '<li>Xin chào <a href="'.$base_url.'profile.html" ><strong>'.$_SESSION['fullname'].'</strong></a></li>';
+										echo '<li>Xin chào <a href="'.$base_url.'profile.php" ><strong>'.$_SESSION['fullname'].'</strong></a></li>';
 										echo '<li><a href="'.$base_url.'logout.html">Đăng xuất</a></li>';
 									}
 									?>
@@ -178,8 +177,8 @@
 				<form method="POST">
 					<ul>
 						<li class="m_bottom_15">
-							<label for="username" class="m_bottom_5 d_inline_b">Email</label><br>
-							<input type="email" name="email" class="r_corners full_width">
+							<label for="username" class="m_bottom_5 d_inline_b">Tài khoản</label><br>
+							<input type="text" name="account" class="r_corners full_width">
 						</li>
 						<li class="m_bottom_25">
 							<label for="password" class="m_bottom_5 d_inline_b">Mật khẩu</label><br>
